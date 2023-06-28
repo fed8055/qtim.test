@@ -2,7 +2,9 @@
 
 namespace App\Exceptions;
 
+use App\Http\Response\Response;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Illuminate\Validation\ValidationException;
 use Throwable;
 
 class Handler extends ExceptionHandler
@@ -23,8 +25,22 @@ class Handler extends ExceptionHandler
      */
     public function register(): void
     {
-        $this->reportable(function (Throwable $e) {
-            //
+        $response = new Response();
+
+        $this->renderable(function (ValidationException $e) use ($response) {
+            return $response
+                ->setStatusCode($e->status)
+                ->setSuccess(false)
+                ->addError($e->errors())
+                ->format();
+        });
+
+        $this->renderable(function (Throwable $e) use ($response) {
+            return $response
+                ->setStatusCode($e->getCode())
+                ->setSuccess(false)
+                ->addError($e->getMessage())
+                ->format();
         });
     }
 }
