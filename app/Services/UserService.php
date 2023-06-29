@@ -20,19 +20,22 @@ class UserService implements UserServiceContract
         $this->userRepository->register($dto);
     }
 
+    /**
+     * @psalm-suppress PossiblyUndefinedMethod
+     * @psalm-suppress UndefinedInterfaceMethod
+     */
     public function formTokenResponse(string $token = null): array
     {
         if (is_null($token)) {
             /** @var User $user */
             $user = auth()->user();
-            /** @var string $token */
             $token = $user->createToken($user->name)->plainTextToken;
         }
 
         return [
             'access_token' => $token,
             'token_type' => 'bearer',
-            'expires_in' => auth()->factory()->getTTL() * 60//todo investigate
+            'expires_in' => auth()->factory(User::class)->getTTL() * 60 //60 minutes
         ];
     }
 }

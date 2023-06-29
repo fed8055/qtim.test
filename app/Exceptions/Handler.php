@@ -37,7 +37,7 @@ class Handler extends ExceptionHandler
 
         $this->renderable(function (Throwable $e) use ($response) {
             return $response
-                ->setStatusCode($e->getCode())
+                ->setStatusCode((int) $e->getCode())
                 ->setSuccess(false)
                 ->addError($e->getMessage())
                 ->format();

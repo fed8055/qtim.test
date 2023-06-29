@@ -8,5 +8,5 @@ interface UserServiceContract
 {
     public function register(UserRegistrationDto $dto): void;
 
-    public function formTokenResponse(string $token): array;
+    public function formTokenResponse(string $token = null): array;
 }

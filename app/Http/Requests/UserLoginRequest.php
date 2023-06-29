@@ -6,6 +6,9 @@ use Illuminate\Foundation\Http\FormRequest;
 
 class UserLoginRequest extends FormRequest
 {
+    /**
+     * @psalm-suppress UndefinedInterfaceMethod
+     */
     public function authorize(): bool
     {
         return auth()->attempt([

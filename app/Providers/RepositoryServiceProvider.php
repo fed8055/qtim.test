@@ -4,10 +4,8 @@ namespace App\Providers;
 
 use App\Contracts\Repositories\NewsRepositoryContract;
 use App\Contracts\Repositories\UserRepositoryContract;
-use App\Contracts\Services\NewsServiceContract;
 use App\Repositories\NewsRepository;
 use App\Repositories\UserRepository;
-use App\Services\NewsService;
 
 class RepositoryServiceProvider extends \Illuminate\Support\ServiceProvider
 {

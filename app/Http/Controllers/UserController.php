@@ -29,11 +29,18 @@ class UserController extends Controller
         ))->format();
     }
 
+    /**
+     * @psalm-suppress PossiblyUndefinedMethod
+     */
     public function me(): Response
     {
-        return new Response(auth()->user());
+        $user = auth()->user();
+        return new Response($user);
     }
 
+    /**
+     * @psalm-suppress UndefinedInterfaceMethod
+    */
     public function logout(): Response
     {
         auth()->logout();
@@ -42,6 +49,7 @@ class UserController extends Controller
     }
 
     /**
+     * @psalm-suppress UndefinedInterfaceMethod
      * @throws JsonException
      */
     public function refresh(UserServiceContract $userService): Response

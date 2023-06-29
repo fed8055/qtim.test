@@ -17,8 +17,11 @@ class NewsUpdateRequest extends FormRequest
 
     public function toDto(): NewsUpdateDto
     {
+        /** @var int $id */
+        $id = $this->route('id');
+
         return new NewsUpdateDto(
-            id: $this->route('id'),
+            id: $id,
             header: $this->get('header'),
             text: $this->get('text')
         );

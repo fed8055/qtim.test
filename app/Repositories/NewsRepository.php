@@ -13,11 +13,14 @@ class NewsRepository implements NewsRepositoryContract
 
     public function store(NewsStoreDto $dto): News
     {
-        return News::query()->create([
+        /** @var News $model */
+        $model = News::query()->create([
             'text' => $dto->text,
             'header' => $dto->header,
             'user_id' => $dto->userId
         ]);
+
+        return $model;
     }
 
     public function update(NewsUpdateDto $dto): void
